@@ -6,7 +6,7 @@ Curso de Full Stack con Python y Javascript
 >
 > La empresa quiere que todaslas páginas del sitio sean homogéneas además de que puedan verse bien en computadoras de escritorio, tablets o teléfonos celulares.
 
-Para más datos técnicos para el desarrollo, revisar el <a href="" alt=documento PDF>
+Para más datos, revisar el <a href="CURSO-DESWEB-PYTHON-JS-2021-TPFINAL.pdf">PDF
 
 ---
 ## 👩‍💻 Stack utilizado
