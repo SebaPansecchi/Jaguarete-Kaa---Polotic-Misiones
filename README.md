@@ -1,4 +1,4 @@
-# TP Integrador Final de Polotic Misiones 2021 - Jaguarete Kaa
+# TP Integrador Final de Polotic Misiones - Jaguarete Kaa
 Curso de Full Stack con Python y Javascript
 
 ## 📄 Consigna del Trabajo Práctico
