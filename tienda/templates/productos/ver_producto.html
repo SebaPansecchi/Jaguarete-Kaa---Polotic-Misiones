@@ -1,0 +1,42 @@
+{% extends 'base/general.html' %}
+{% block title %}Jaguarete Kaa - Ver Productos{% endblock %}
+{% block content %}
+    
+<h1 style="text-align: center;"><strong>{{ producto.titulo }}</strong></h1>
+<div class="card m-3 my-5 py-5">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{ producto.imagen.url }}" width="100%;" alt="{{ producto.titulo }}">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h3 class="card-title pb-2">
+              Categoria: {{ producto.categoria.descripcion }}                  
+          </h3>
+          <p class="card-text" style="text-align: justify;">{{ producto.descripcion }}</p><br>
+          <div class="row" style="justify-content:space-between;display:flex;">
+            <div class="col-md-6 pb-5">
+              <span class="h4">${{ producto.precio }}</span>
+            </div>
+            
+            <div class="col-md-6 ">
+                {% if not user.is_staff  %}
+                  <form class="form-inline"> 
+                    
+                    <div class="form-group">
+                      <input type="number" name="cantidad" min="1" id="" value="1" required class="form-control"><br>
+                      <button class="btn btn-primary">Agregar al carrito &nbsp; <i class="fas fa-cart-plus"></i></button>
+                    </div>
+                  </form>
+                  
+                {% else %}
+                  <a href="{% url 'tienda:editar' producto.id %}?next={{ request.path }}" class="btn btn-warning btn-lg">Editar producto</a>
+                  <a href="{% url 'tienda:eliminar' producto.id %}" class="btn btn-danger">Eliminar producto</a>
+                {% endif %}
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

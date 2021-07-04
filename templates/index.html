@@ -1,0 +1,54 @@
+{% extends 'base/general.html' %}
+
+{% block title %}
+  {{ title }}
+{% endblock title %}
+  
+{% block content %}
+  <div>
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="media\productos\2021\06\Carrusel\52.png" alt="First slide">
+        </div>
+      </div>
+    </div>
+    <div class="container py-5">           
+      {% if messages %}
+          {% for message in messages %}
+              <div class="alert {% if message.tags == 'error'%}alert-danger{% else %}alert-success{% endif %} alert-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>                                         
+          {% endfor %}    
+      {% endif %}  
+    </div>
+    <h1 class="text-center pb-2"><strong>PRODUCTOS DESTACADOS</strong></h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4 my-3">
+      {% for producto in tresProductos %}
+        <div class="col my-3">
+          <div class="card">
+            <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.titulo }}">
+            <div class="card-body">
+              <h4 class="card-title">{{ producto.titulo }}</h4>
+              <p class="card-text">{{ producto.descripcion|truncatechars:100|safe }}</p>
+              <p class="h5">${{ producto.precio }}</p>
+              <a href="{% url 'tienda:producto' producto.id %}" class="btn btn-primary">Ver producto</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}  
+    </div>
+    <h3 class="mt-5"><i class="fa fa-star"></i>Más productos</h3>
+    <div class="list-group my-5">
+      {% for un_producto in restoProductos %}
+        <a href="{% url 'tienda:producto' un_producto.id %}" class="list-group-item list-group-item-action">
+          <img src="{{ un_producto.imagen.url }}" width="100px">&nbsp;
+          <strong>{{ un_producto.titulo }}</strong><br>
+          {{ un_producto.descripcion }}
+        </a><br>
+      {% endfor %}
+    </div>
+  </div>  
+{% endblock content %}
+    

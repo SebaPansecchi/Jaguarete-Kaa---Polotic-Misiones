@@ -1,0 +1,29 @@
+{% extends 'base/general.html' %}
+{% block title %}Jaguarete Kaa - Registro{% endblock %}
+{% block content %}
+    
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <h2>Registro</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {% for campo in form %}
+                        <div class="form-group mb-3">
+                            {{ campo.label_tag }}
+                            {{ campo }}
+
+                            {% if campo.errors %}
+                                {{ campo.errors }}
+                            {% endif %}
+                                
+                        </div>
+                    {% endfor %}
+                        
+                    <button type="submit" class="btn btn-primary">Registrarme</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    

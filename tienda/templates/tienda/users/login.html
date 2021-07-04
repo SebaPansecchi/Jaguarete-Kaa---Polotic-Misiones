@@ -1,0 +1,37 @@
+{% extends 'base/general.html' %}
+{% block title %}Jaguarete Kaa - Login{% endblock %}       
+{% block content %}
+             
+        {% if messages %}
+            
+            {% for message in messages %}
+
+                <div class="alert {% if message.tags == 'error'%}alert-danger{% else %}alert-success{% endif %} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>   
+
+            {% endfor %}
+                
+        {% endif %}     
+
+    <div class="container">
+        <div class="row">
+            <div class="div col">
+                <h1 style="text-align: center;color:#0B5ED7;font-weight: bold;">Jaguarete Kaa SA</h1>
+                <h2 class="mb-3">Login</h2>
+                <form method="post">{% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Usuario</label>
+                        <input type="text" name="username" id="username" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="password">Contraseña</label>
+                        <input type="password" name="password" id="password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

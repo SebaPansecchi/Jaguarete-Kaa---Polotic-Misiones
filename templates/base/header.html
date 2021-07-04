@@ -1,0 +1,62 @@
+{% url 'tienda:index' as index %}
+{% url 'tienda:login' as login %}
+{% url 'tienda:logout' as logout %}
+{% url 'tienda:register' as register %}
+{% url 'tienda:acerca' as acerca %}
+{% url 'tienda:categoria' as categories %}
+{% url 'tienda:nuevo' as nuevo_producto %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'tienda:index' %}">Jaguarete Kaa</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse center-content" id="navbarSupportedContent">
+      <ul class="navbar-nav m-auto">
+        <li class="nav-item">
+          <a class="nav-link btn {% if request.path == index %}active{% endif %}" aria-current="page" href="{% url 'tienda:index' %}">HOME</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle btn {% if request.path == categories %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            CATEGORIAS
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            
+            {% for categoria in categorias %}
+              <li><a class="dropdown-item "  href="{% url 'tienda:categoria' categoria.id %}">{{ categoria.descripcion }}</a></li>
+            {% endfor %}
+            
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn {% if request.path == acerca %}active{% endif %}" href="{% url 'tienda:acerca' %}">ACERCA DE...</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn" target="_blank" href="mailto:jspansecchi@gmail.com?subject=Atencion%20al%20cliente%20desde%20Jaguarete%20Kaa%20SA">CONTACTO</a>
+        </li>
+        {% if user.is_staff %}
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == nuevo_producto %}active{% endif %}" href="{{ nuevo_producto }}" tabindex="-1" >NUEVO PRODUCTO</a>
+        </li>
+        {% endif %}
+      </ul>
+      {% if user.is_authenticated %}
+        {% if user.is_staff %}
+          <a href="{{ logout }}" class="btn btn-primary" ><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>&nbsp;
+        {% else %}
+          <a href="{% url 'tienda:cart_detalle' %}" class="btn btn-primary"><i class="fas fa-shopping-cart"></i>&nbsp;Carrito</a>&nbsp;
+          <a href="{{ logout }}" class="btn btn-primary" ><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>&nbsp;
+        {% endif %}
+        
+        {% else %}
+          <a href="{{ login }}" class="btn btn-primary"><i class="fas fa-user"></i>&nbsp; Login</a>&nbsp;
+          <a href="{{ register }}" class="btn btn-primary"><i class="fas fa-edit"></i>&nbsp;Registro</a>&nbsp;
+      {% endif %}
+      <form class="d-flex" action="{% url 'tienda:buscar' %}" method="GET">
+        <input class="form-control me-2" type="search" name="q" value="{{ query }}" placeholder="Buscar..." aria-label="Search">
+        <button class="btn btn-primary" type="submit">Buscar</button>
+      </form>
+    </div>
+  </div>
+</nav>

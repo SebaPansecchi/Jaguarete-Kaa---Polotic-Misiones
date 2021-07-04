@@ -1,0 +1,19 @@
+{% include 'base/general.html' %} 
+{% block content %}
+    <div class="container pb-3">
+        <h1>Resultados para: {{ query }} ({{ count }})</h1>
+        <div class="row m-5">        
+            {% for producto in producto_list %}
+            <div class="list-group mt-5">
+                <a href="{% url 'tienda:producto' producto.id %}" class="list-group-item list-group-item-action">
+                    <img src="{{ producto.imagen.url }}" width="100px">&nbsp;
+                    <strong class="h3">{{ producto.titulo }}</strong><br>
+                    {{ producto.descripcion|truncatechars:200|safe }}
+                </a><br>
+            </div>   
+            {% endfor %}
+                
+        </div>
+    </div>
+{% endblock content %}
+   

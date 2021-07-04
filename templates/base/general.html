@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="shortcut icon" href="media\logo\images-removebg-preview.png">
+</head>
+<body>
+    <header style="max-width: 100%;">
+        {% include 'base/header.html' %}
+    </header>
+    <main class="p-3 mb-5">
+        {% block content %}
+            
+        {% endblock content %}
+    </main>
+    <footer class="footer py-3 bg-dark">
+       {% include 'base/footer.html' %}            
+    </footer>
+    
+</body>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}" ></script>
+<script src="https://kit.fontawesome.com/ea08c57021.js" crossorigin="anonymous"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtewV_EjGjQan1Iyr3mev9NdURkx819yw&callback=myMap"></script>
+</html>
+
